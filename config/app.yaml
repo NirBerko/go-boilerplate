@@ -1,0 +1,9 @@
+DSN: "postgres://user:password@horton.elephantsql.com:5432/database"
+Mode: debug # debug / release
+
+Server:
+  Port: 8080
+
+jwt:
+  verification_key: "QfCAH04Cob7b71QCqy738vw5XGSnFZ9d"
+  signing_key: "QfCAH04Cob7b71QCqy738vw5XGSnFZ9d"
