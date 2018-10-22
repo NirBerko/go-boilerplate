@@ -35,15 +35,15 @@ func buildRouter(router *gin.Engine, db *gorm.DB) {
 		app.Transactional(db),
 	)
 
+	router.GET("/ping", func(c *gin.Context) {
+		c.Abort()
+		c.String(200, "OK "+app.Version)
+	})
+
 	authDAO := daos.NewAuthDAO()
 	apis.ServeAuthResource(router, services.NewAuthService(authDAO))
 
 	router.Use(
 		app.JwtMiddleware(),
 	)
-
-	router.GET("/ping", func(c *gin.Context) {
-		c.Abort()
-		c.String(200, "OK "+app.Version)
-	})
 }

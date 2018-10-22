@@ -22,10 +22,10 @@ type (
 func ServeAuthResource(rg *gin.Engine, service authService) {
 	r := &authResource{service}
 
-	rg.POST("/login", r.Login)
+	rg.POST("/login", r.Auth)
 }
 
-func (r *authResource) Login(c *gin.Context) {
+func (r *authResource) Auth(c *gin.Context) {
 	/*var user models.User
 	  c.BindJSON(&user)
 
@@ -46,18 +46,3 @@ func (r *authResource) Login(c *gin.Context) {
 		"token": token,
 	})
 }
-
-/*
-func authenticate(c Credential) models.Identity {
-    if c.Username == "demo" && c.Password == "pass" {
-        return &models.User{ID: 100, Name: "demo"}
-    }
-    return nil
-}
-
-func JWTHandler(c *routing.Context, j *jwt.Token) error {
-    userID := j.Claims.(jwt.MapClaims)["id"].(string)
-    app.GetRequestScope(c).SetUserID(userID)
-    return nil
-}
-*/

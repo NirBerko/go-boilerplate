@@ -8,24 +8,24 @@ type RequestScope interface {
 	Db() *gorm.DB
 	SetDB(db *gorm.DB)
 	RequestID() string
-	SetUserID(userId int)
+	SetUserID(userId uint64)
 }
 
 type requestScope struct {
 	db        *gorm.DB
 	requestID string
-	userID    int
+	userID    uint64
 }
 
 func (rs *requestScope) RequestID() string {
 	return rs.requestID
 }
 
-func (rs *requestScope) SetUserID(userId int) {
+func (rs *requestScope) SetUserID(userId uint64) {
 	rs.userID = userId
 }
 
-func (rs *requestScope) UserID() int {
+func (rs *requestScope) UserID() uint64 {
 	return rs.userID
 }
 
