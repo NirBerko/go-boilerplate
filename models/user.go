@@ -7,7 +7,7 @@ type Identity interface {
 }
 
 type User struct {
-	ID       int    `gorm:"primary_key"`
+	ID       int    `gorm:"-"`
 	Name     string `gorm:"column:name"`
 	Phone    string `gorm:"column:phone"`
 	Password string `gorm:"column:password"`

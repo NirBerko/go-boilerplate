@@ -20,3 +20,9 @@ func (dao *AuthDAO) Login(rs app.RequestScope, user *models.User) *models.User {
 
 	return user
 }
+
+func (dao *AuthDAO) Register(rs app.RequestScope, user *models.User) error {
+	create := rs.Db().Create(&user)
+
+	return create.Error
+}

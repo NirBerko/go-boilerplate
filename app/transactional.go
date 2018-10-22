@@ -2,6 +2,8 @@ package app
 
 import (
 	"boilerplate/errors"
+	"boilerplate/util"
+	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -19,6 +21,9 @@ func JwtMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		rs := GetRequestScope(c)
 
+		fmt.Println(util.HashAndSalt([]byte("m1ub8wx3")))
+		fmt.Println(util.ComparePasswords("$2a$04$Omcu.rqT7zq5bHHyti8GZ.CzJXS0dFoVuRJmSMmCzzkLAbXkPAGfa", []byte("m1ub8wx3")))
+
 		authentication := c.GetHeader("Authorization")
 
 		claims := jwt.MapClaims{}
@@ -30,7 +35,7 @@ func JwtMiddleware() gin.HandlerFunc {
 			rs.SetUserID(uint64(claims["id"].(float64)))
 		} else {
 			errorHandler := errors.Unauthorized(err.Error())
-			c.AbortWithStatusJSON(errorHandler.Status, errorHandler.Message)
+			c.AbortWithStatusJSON(errorHandler.StatusCode(), errorHandler.Message)
 		}
 	}
 }

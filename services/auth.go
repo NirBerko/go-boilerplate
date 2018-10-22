@@ -3,10 +3,12 @@ package services
 import (
 	"boilerplate/app"
 	"boilerplate/models"
+	"boilerplate/util"
 )
 
 type authDAO interface {
 	Login(rs app.RequestScope, user *models.User) *models.User
+	Register(rs app.RequestScope, user *models.User) error
 }
 
 type AuthService struct {
@@ -19,4 +21,10 @@ func NewAuthService(dao authDAO) *AuthService {
 
 func (s *AuthService) Login(rs app.RequestScope, user *models.User) {
 	s.dao.Login(rs, user)
+}
+
+func (s *AuthService) Register(rs app.RequestScope, user *models.User) error {
+	user.Password = util.HashAndSalt([]byte(user.Password))
+
+	return s.dao.Register(rs, user)
 }

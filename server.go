@@ -46,4 +46,10 @@ func buildRouter(router *gin.Engine, db *gorm.DB) {
 	router.Use(
 		app.JwtMiddleware(),
 	)
+
+	router.GET("/pingAuth", func(c *gin.Context) {
+		c.Abort()
+		c.String(200, "OK "+app.Version)
+	})
+
 }
