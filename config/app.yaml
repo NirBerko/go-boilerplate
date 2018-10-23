@@ -1,3 +1,4 @@
+DSN: "postgres://user:password@horton.elephantsql.com:5432/database"
 Mode: debug # debug / release
 
 Server:
