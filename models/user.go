@@ -1,19 +1,13 @@
 package models
 
-type Identity interface {
-	GetID() int
-	GetName() string
-	GetPhone() string
-}
-
 type User struct {
-	ID       int    `gorm:"-"`
-	Name     string `gorm:"column:name"`
-	Phone    string `gorm:"column:phone"`
-	Password string `gorm:"column:password"`
+	DBBase
+	Name     string `gorm:"column:name" json:"name"`
+	Phone    string `gorm:"column:phone" json:"phone"`
+	Password string `gorm:"column:password" json:"-"`
 }
 
-func (u User) GetID() int {
+func (u User) GetID() uint {
 	return u.ID
 }
 

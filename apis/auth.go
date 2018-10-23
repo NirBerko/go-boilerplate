@@ -29,12 +29,10 @@ func ServeAuthResource(rg *gin.Engine, service authService) {
 }
 
 func (r *authResource) Auth(c *gin.Context) {
-	/*var user models.User
-	  c.BindJSON(&user)
+	var user models.User
+	c.BindJSON(&user)
 
-	  r.service.Login(app.GetRequestScope(c), &user)*/
-
-	user := models.User{1, "nir", "0545630117", "123"}
+	//r.service.Login(app.GetRequestScope(c), &user)*/
 
 	token, err := app.NewJWT(jwt.MapClaims{
 		"id":  user.GetID(),
